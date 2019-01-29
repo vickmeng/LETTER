@@ -1,0 +1,30 @@
+<ion-split-pane>
+  <ion-menu [contentId]="'anonymousLetter'" menuId="anonymousMenu">
+    <ion-content>
+      <ion-textarea [(ngModel)]="value"></ion-textarea>
+      <ion-button (click)="onWriteOver()">写好了</ion-button>
+    </ion-content>
+  </ion-menu>
+  <ion-content main id="anonymousLetter" [fullscreen]="true">
+    <ion-fab vertical="top" horizontal="start" slot="fixed" >
+      <ion-fab-button color="dark">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="end">
+        <ion-fab-button (click)="onNemuOpen()">
+          <ion-icon name="brush"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="onDownLoad()">
+          <ion-icon name="download"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+    <canvas 
+      #mainCanvas
+      [width]="width" 
+      [height]="height"
+    >
+    </canvas>
+    
+  </ion-content>
+</ion-split-pane>

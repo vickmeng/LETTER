@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
-  }
+  },
+  {
+    path: 'anonymous-letter',
+    loadChildren: './anonymous-letter/anonymous-letter.module#AnonymousLetterPageModule'
+  },
 ];
 
 @NgModule({
