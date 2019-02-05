@@ -1,5 +1,5 @@
-import { mapArray } from 'src/shared/utils/structure';
-import { getImage } from 'src/shared/utils/common';
+// import { mapArray } from 'src/shared/utils/structure';
+import { getImage, devicePixelRatio } from 'src/shared/utils/common';
 import { getRandomInit } from 'src/shared/utils/maths';
 
 import * as _ from 'lodash';
@@ -19,16 +19,17 @@ const sizeList: number[] = [
     42 , 50 , 58 , 66, 72
 ];
 
-const screenPadding = 30; // 控制占屏比
-
 export class PaperCut {
     protected ctx: CanvasRenderingContext2D = this.canvas.getContext('2d');
 
-    private elementList: Element[][];
-    private lineHeight = _.max(sizeList);
+    private sizeList = sizeList.map(v => v * devicePixelRatio);
+    private screenPadding = 30 * devicePixelRatio ;
+    private fontMargin = 24 * devicePixelRatio ;
 
-    private canvasWidth: number;
-    private canvasHeight: number;
+
+    private elementList: Element[][];
+    private lineHeight: number ;
+
 
     private contentMaxWidth: number;
     private contentWidth: number;
@@ -50,39 +51,30 @@ export class PaperCut {
         this.contentHeight = this.getContentHeight();
         this.contentX = this.getContentX();
         this.contentY = this.getContentY();
-        this.handleDrawBackground();
         this.handleDrawContent();
     }
 
     private handleInitConstant = () => {
-        this.canvasWidth = +this.canvas.getAttribute('width');
-        this.canvasHeight = +this.canvas.getAttribute('height');
-
-        this.contentMaxWidth = this.canvasWidth - (screenPadding * 2);
-    }
-
-    private handleDrawBackground = (fill = '#f2f2f2') => {
-        this.ctx.fillStyle = fill;
-        this.ctx.fillRect(
-            0,
-            0,
-            this.canvasWidth,
-            this.canvasHeight,
-        );
+        this.lineHeight =  _.max(this.sizeList);
+        this.canvas.width = this.canvas.clientWidth * devicePixelRatio;
+        this.canvas.height = this.canvas.clientHeight * devicePixelRatio;
+        this.canvas.width = this.canvas.width;
+        this.canvas.height = this.canvas.height;
+        this.contentMaxWidth = this.canvas.width - (this.screenPadding * 2);
     }
 
     private handleDrawContent = () => {
-        const img$ = getImage('./assets/clippingBG.jpg');
+        const img$ = getImage('./assets/img/clippingBG.jpg');
         img$.subscribe(
             img => {
-                this.ctx.drawImage( img , 0, 0, 691, 921);
+                this.ctx.drawImage( img , 0, 0, this.canvas.width, this.canvas.height);
                 this.handleDrawElements();
             }
         );
     }
 
     private handleDrawElements = () => {
-        const _mapper = (_element: Element) => getImage('./assets/cl.png').pipe(
+        const _mapper = (_element: Element) => getImage('./assets/img/cl.png').pipe(
             map(
                 (img: HTMLImageElement) => ({..._element, img})
             )
@@ -117,7 +109,7 @@ export class PaperCut {
     }
 
     private handleDrawElementText = (X: number, Y: number, _element: Element) => {
-        const fontSize = _element.size - 24;
+        const fontSize = _element.size - this.fontMargin + + getRandomInit(-5 , 5  );
         const paddingTop = (this.lineHeight - _element.size) / 2;
 
         this.ctx.fillStyle = '#111111';
@@ -147,16 +139,16 @@ export class PaperCut {
 
     private getContentHeight = (): number => this.elementList.length * this.lineHeight;
 
-    private getContentX = (): number => (this.canvasWidth - this.contentWidth) / 2;
+    private getContentX = (): number => (this.canvas.width - this.contentWidth) / 2;
 
-    private getContentY = (): number => (this.canvasHeight  - this.contentHeight ) / 2;
+    private getContentY = (): number => (this.canvas.height  - this.contentHeight ) / 2;
 
     // XXX 视图数据映射，这块儿我搞不定了。去TMD RXJS
     private getElementList = (textList: string[]): Element[][] => {
         const ElementList = [[]];
         let lineWith = 0;
         textList.forEach((text, i, arr) => {
-            const size = sizeList[getRandomInit(0, 3)];
+            const size = this.sizeList[getRandomInit(0, 3)];
             if (lineWith + size >= this.contentMaxWidth) {// 冒了
                 ElementList.push([]);
                 lineWith = 0;

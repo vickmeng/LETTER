@@ -11,19 +11,15 @@ import { LoadingService } from 'src/shared/components/loading/loading.service';
 })
 export class AnonymousLetterPage extends BasePage {
   letter: PaperCut;
-
   value = '你好，你的儿子在我手里，请三天内将一百万现金放在天桥下，否则撕票。';
-  width = document.documentElement.clientWidth;
-  height = document.documentElement.clientHeight;
-
   @ViewChild('mainCanvas') mainCanvas: ElementRef<HTMLCanvasElement>;
 
   constructor(
-    private menuController: MenuController,
-    private utils: UtilsService,
+    public menuController: MenuController,
+    public utils: UtilsService,
     private loadingService: LoadingService
   ) {
-    super();
+    super(menuController);
    }
 
   ionViewDidEnter() {
@@ -34,8 +30,6 @@ export class AnonymousLetterPage extends BasePage {
     this.loadingService.on();
     this.letter.draw(this.value);
   }
-
-  onNemuOpen = () => this.menuController.open('anonymousMenu');
 
   onWriteOver = () => {
     this.loadingService.on();
@@ -48,10 +42,9 @@ export class AnonymousLetterPage extends BasePage {
     const download$ = this.utils.downloadCanvas(this.mainCanvas.nativeElement.toDataURL(), '匿名信');
     download$.subscribe(
       console.log,
-      console.log,
+      () => {},
       this.loadingService.off
     );
-
   }
 
 }

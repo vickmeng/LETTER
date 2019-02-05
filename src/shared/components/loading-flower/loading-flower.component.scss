@@ -7,12 +7,16 @@
     background-color: var(--ion-color-primary);
 }
 
-.load .line:nth-last-child(1) {animation: loading 1.5s 1s infinite;}
-.load .line:nth-last-child(2) {animation: loading 1.5s .5s infinite;}
-.load .line:nth-last-child(3) {animation: loading 1.5s 0s infinite;}
+// .load .line:nth-last-child(1) {animation: loading 1.5s 1s infinite;}
+// .load .line:nth-last-child(2) {animation: loading 1.5s .5s infinite;}
+// .load .line:nth-last-child(3) {animation: loading 1.5s 0s infinite;}
+
+.load .line:nth-last-child(1) {animation: loading .6s .1s linear infinite;}
+.load .line:nth-last-child(2) {animation: loading .6s .2s linear infinite;}
+.load .line:nth-last-child(3) {animation: loading .6s .3s linear infinite;}
 
 @keyframes loading {
-    0% {width: 15px;}
-    50% {width: 35px;}
-    100% {width: 15px;}
+    0% {transform: translate(0,0);}
+    50% {transform: translate(0,15px);}
+    100% {transform: translate(0,0);}
 }

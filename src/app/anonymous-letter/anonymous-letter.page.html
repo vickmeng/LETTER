@@ -1,30 +1,29 @@
-<ion-split-pane>
+<!-- <ion-split-pane> -->
   <ion-menu [contentId]="'anonymousLetter'" menuId="anonymousMenu">
     <ion-content>
       <ion-textarea [(ngModel)]="value"></ion-textarea>
       <ion-button (click)="onWriteOver()">写好了</ion-button>
     </ion-content>
   </ion-menu>
-  <ion-content main id="anonymousLetter" [fullscreen]="true">
-    <ion-fab vertical="top" horizontal="start" slot="fixed" >
-      <ion-fab-button color="dark">
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="end">
-        <ion-fab-button (click)="onNemuOpen()">
-          <ion-icon name="brush"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button (click)="onDownLoad()">
-          <ion-icon name="download"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
-    </ion-fab>
+
+
+
+  <ion-content main id="anonymousLetter">
+    <app-transparent-header>
+      <ng-container direction = "left">
+          <ion-icon name="arrow-back" (click)="utils.goBack()"></ion-icon>
+      </ng-container>
+      <ng-container direction = "right">
+        <ion-icon name="brush" (click)="onNemuOpen()" ></ion-icon>
+        <ion-icon name="download" (click)="onDownLoad()"></ion-icon>
+      </ng-container>
+    </app-transparent-header>
+
     <canvas 
       #mainCanvas
-      [width]="width" 
-      [height]="height"
+      class="full"
     >
     </canvas>
-    
+
   </ion-content>
-</ion-split-pane>
+<!-- </ion-split-pane> -->

@@ -2,27 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
-
-import { AnonymousLetterPage } from './anonymous-letter.page';
 import { SharedModule } from 'src/shared/shared.module';
+
+import { ChineseColorPage } from './chinese-color.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AnonymousLetterPage
+    component: ChineseColorPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AnonymousLetterPage],
+  declarations: [ChineseColorPage],
 })
-export class AnonymousLetterPageModule {}
+export class ChineseColorPageModule {}

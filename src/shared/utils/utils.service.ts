@@ -3,12 +3,21 @@ import { PhotoLibrary, LibraryItem} from '@ionic-native/photo-library/ngx';
 
 import { Observable, from} from 'rxjs';
 import { switchMap, take} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UtilsService {
     constructor(
-        private photoLibrary: PhotoLibrary
+        private photoLibrary: PhotoLibrary,
+        private router: Router
+
     ) {}
+
+    goBack = () => {
+        // history.go(-1);
+        this.router.navigate(['../']);
+
+    }
 
     downloadCanvas = (src: string, fileName = '') =>  from(this.PhotoLibraryRequestAuthorization()).pipe(
         switchMap(this.PhotoLibraryGetLibrary),

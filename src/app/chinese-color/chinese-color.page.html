@@ -1,0 +1,30 @@
+<ion-menu [contentId]="'chineseColor'" menuId="chineseColorMenu">
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label></ion-label>
+        <ion-input [(ngModel)]="value" (keyup.enter)="onChange()"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="full" (click)="onChange()" >写好了</ion-button>
+  </ion-content>
+</ion-menu>
+
+<ion-content main id="chineseColor">
+  <app-transparent-header [color] = "'light'">
+    <ng-container direction = "left">
+      <ion-icon name="arrow-back" (click)="utils.goBack()"></ion-icon>
+    </ng-container>
+    <ng-container direction = "right">
+      <ion-icon name="brush" (click)="onToggleNemu(true)" ></ion-icon>
+      <ion-icon name="refresh" (click)="onChange()"></ion-icon>
+      <ion-icon name="download" (click)="onDownLoad()"></ion-icon>
+    </ng-container>
+  </app-transparent-header>
+  <div
+    #paper
+    id="paper"
+    class="full"
+  >
+  </div>
+</ion-content>

@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-
-import { NavController } from '@ionic/angular';
-import { AnonymousLetterPage } from '../anonymous-letter/anonymous-letter.page';
 import { Router } from '@angular/router';
 
 interface Nav {
   imgSrc: string;
   path: string;
+  title: string;
 }
 
 @Component({
@@ -15,13 +13,18 @@ interface Nav {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  anonymous: AnonymousLetterPage;
 
 
   navList: Nav[] = [
     {
       imgSrc: '/assets/shapes.svg',
       path: 'anonymous-letter',
+      title: '匿名信'
+    },
+    {
+      imgSrc: '/assets/shapes.svg',
+      path: 'chinese-color',
+      title: '中国颜色'
     }
   ];
   constructor(

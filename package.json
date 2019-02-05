@@ -42,6 +42,7 @@
     "core-js": "^2.5.4",
     "lodash": "^4.17.11",
     "rxjs": "~6.3.3",
+    "spritejs": "^2.27.2",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {

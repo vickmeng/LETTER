@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'anonymous-letter',
     loadChildren: './anonymous-letter/anonymous-letter.module#AnonymousLetterPageModule'
   },
+  {
+    path: 'chinese-color',
+    loadChildren: './chinese-color/chinese-color.module#ChineseColorPageModule'
+  },
 ];
 
 @NgModule({

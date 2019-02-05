@@ -10,7 +10,7 @@ import { PhotoLibrary} from '@ionic-native/photo-library/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from 'src/shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { SharedModule } from 'src/shared/shared.module';
   entryComponents: [
   ],
   imports: [
-    SharedModule,
+    CommonModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule
@@ -32,6 +32,6 @@ import { SharedModule } from 'src/shared/shared.module';
     PhotoLibrary,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

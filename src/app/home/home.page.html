@@ -14,7 +14,9 @@
       <ion-card *ngFor="let item of navList" (click)="onRoute(item)">
         <ion-img [src]="item.imgSrc"></ion-img>
         <ion-card-header>
-          <ion-card-title>匿名信</ion-card-title>
+          <ion-card-title>
+            {{item.title}}
+          </ion-card-title>
         </ion-card-header>
       </ion-card>
   </ng-container>
